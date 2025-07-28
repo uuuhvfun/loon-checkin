@@ -1,0 +1,24 @@
+#!name = 69云自动签到
+#!desc = 69云机场自动签到插件，支持自动获取Cookie和定时签到
+#!openUrl = https://69yun69.com/user
+#!author = 你的名字
+#!homepage = https://github.com/你的用户名/loon-69yun-checkin
+#!tag = 签到, 69云, 机场
+#!system = 
+#!system_version = 
+#!loon_version = 3.2.1(732)
+#!icon = https://raw.githubusercontent.com/你的用户名/loon-69yun-checkin/main/icon.png
+#!date = 2025-07-28 12:00:00
+
+[Script]
+# Cookie获取脚本
+http-response ^https:\/\/69yun69\.com\/user\/ajax_data\/table\/paylist script-path=https://raw.githubusercontent.com/你的用户名/loon-69yun-checkin/main/cookie-capture.js, requires-body=false, timeout=10, tag=69云Cookie获取, img-url=https://raw.githubusercontent.com/你的用户名/loon-69yun-checkin/main/cookie.png
+
+# 自动签到脚本 - 每天8-9点执行
+cron "0 8-9 * * *" script-path=https://raw.githubusercontent.com/uuuhvfun/loon-checkin/refs/heads/main/checkin.js, timeout=10, tag=69云自动签到, img-url=https://gravatar.loli.net/avatar/69a48f0fb10ff6a106c538590b60ed34?&d=monsterid
+
+# 手动签到脚本 - 用于测试
+generic script-path=https://raw.githubusercontent.com/uuuhvfun/loon-checkin/refs/heads/main/cookie-capture.js, timeout=10, argument=, tag=手动签到测试, img-url=https://gravatar.loli.net/avatar/69a48f0fb10ff6a106c538590b60ed34?&d=monsterid
+
+[MITM]
+hostname = 69yun69.com

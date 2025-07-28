@@ -86,10 +86,31 @@ function showStoredCookie() {
     }
 }
 
+// 检查运行环境
+function checkEnvironment() {
+    if (typeof $request === 'undefined') {
+        console.log("❌ 错误：脚本运行环境不正确");
+        console.log("📝 请检查：");
+        console.log("1. 确保脚本配置为 http-response 类型");
+        console.log("2. 确保访问的URL匹配脚本监听模式");
+        console.log("3. 确保MITM功能已开启");
+        $notification.post("69云Cookie获取", "配置错误", "脚本环境不正确，请检查配置");
+        return false;
+    }
+    return true;
+}
+
 // 主执行函数
 function main() {
     console.log("🔍 开始监听Cookie获取...");
+    
+    // 检查运行环境
+    if (!checkEnvironment()) {
+        return;
+    }
+    
     console.log(`📍 请求URL: ${$request.url}`);
+    console.log(`📍 请求方法: ${$request.method}`);
     
     // 显示当前存储的cookie信息
     showStoredCookie();
